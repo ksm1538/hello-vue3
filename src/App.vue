@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>{{ name1 }}</div>
+  <div>{{ name2 }}</div>
+  <button 
+    class="btn btn-primary"
+    v-on:click="updateName"
+  >
+    이름 변경
+  </button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, reactive } from 'vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  setup() {
+    let name1 = ref('Iron Man 1');	// ref
+    let name2 = reactive({'name': 'Iron Man 2'}); // reactive
+    const updateName = () => {
+      name1.value = 'Dr.Strange 1'; // ref update
+      name2.name = 'Dr.Strange 2'; // reactive update
+    };
+    
+    return {
+      name1,
+      name2,
+      updateName
+    };
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
